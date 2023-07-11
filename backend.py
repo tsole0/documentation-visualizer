@@ -17,7 +17,7 @@ class Window(QtWidgets.QMainWindow):
 
     def load_html(self):
         self.view = QtWebEngineWidgets.QWebEngineView()
-        html = abspath("my_docs.html")
+        html = abspath("../sasview/docs/sphinx-docs/build/html/index.html")
         self.view.setUrl(QtCore.QUrl.fromLocalFile(html))
         # Show the web view in a window
         self.setCentralWidget(self.view)
