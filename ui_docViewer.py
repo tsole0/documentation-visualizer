@@ -15,52 +15,59 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QSizePolicy, QTabWidget,
-    QWidget)
+from PySide6.QtWebEngineWidgets import QWebEngineView
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QPushButton,
+    QSizePolicy, QSpacerItem, QWidget)
 
 class Ui_docViewerWindow(object):
     def setupUi(self, docViewerWindow):
         if not docViewerWindow.objectName():
             docViewerWindow.setObjectName(u"docViewerWindow")
         docViewerWindow.setWindowModality(Qt.NonModal)
-        docViewerWindow.resize(333, 300)
+        docViewerWindow.resize(512, 582)
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(50)
-        sizePolicy.setVerticalStretch(100)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(docViewerWindow.sizePolicy().hasHeightForWidth())
         docViewerWindow.setSizePolicy(sizePolicy)
+        docViewerWindow.setMinimumSize(QSize(30, 30))
         self.gridLayout = QGridLayout(docViewerWindow)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.tabWidget = QTabWidget(docViewerWindow)
-        self.tabWidget.setObjectName(u"tabWidget")
-        self.tab = QWidget()
-        self.tab.setObjectName(u"tab")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.tab.sizePolicy().hasHeightForWidth())
-        self.tab.setSizePolicy(sizePolicy1)
-        self.tabWidget.addTab(self.tab, "")
-        self.tab_2 = QWidget()
-        self.tab_2.setObjectName(u"tab_2")
-        sizePolicy1.setHeightForWidth(self.tab_2.sizePolicy().hasHeightForWidth())
-        self.tab_2.setSizePolicy(sizePolicy1)
-        self.tabWidget.addTab(self.tab_2, "")
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.editButton = QPushButton(docViewerWindow)
+        self.editButton.setObjectName(u"editButton")
+
+        self.horizontalLayout.addWidget(self.editButton)
+
+        self.cancelButton = QPushButton(docViewerWindow)
+        self.cancelButton.setObjectName(u"cancelButton")
+
+        self.horizontalLayout.addWidget(self.cancelButton)
+
+
+        self.gridLayout.addLayout(self.horizontalLayout, 2, 0, 1, 1)
+
+        self.webEngineViewer = QWebEngineView(docViewerWindow)
+        self.webEngineViewer.setObjectName(u"webEngineViewer")
+        sizePolicy.setHeightForWidth(self.webEngineViewer.sizePolicy().hasHeightForWidth())
+        self.webEngineViewer.setSizePolicy(sizePolicy)
+
+        self.gridLayout.addWidget(self.webEngineViewer, 1, 0, 1, 1)
 
 
         self.retranslateUi(docViewerWindow)
-
-        self.tabWidget.setCurrentIndex(1)
-
 
         QMetaObject.connectSlotsByName(docViewerWindow)
     # setupUi
 
     def retranslateUi(self, docViewerWindow):
         docViewerWindow.setWindowTitle(QCoreApplication.translate("docViewerWindow", u"docViewerWindow", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("docViewerWindow", u"Tab 1", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("docViewerWindow", u"Tab 2", None))
+        self.editButton.setText(QCoreApplication.translate("docViewerWindow", u"Edit", None))
+        self.cancelButton.setText(QCoreApplication.translate("docViewerWindow", u"Cancel", None))
     # retranslateUi
 
