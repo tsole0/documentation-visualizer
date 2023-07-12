@@ -16,44 +16,20 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtWidgets import (QApplication, QDialog, QGridLayout, QHBoxLayout,
-    QPushButton, QSizePolicy, QSpacerItem, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QSizePolicy, QWidget)
 
 class Ui_docViewerWindow(object):
     def setupUi(self, docViewerWindow):
         if not docViewerWindow.objectName():
             docViewerWindow.setObjectName(u"docViewerWindow")
-        docViewerWindow.resize(710, 806)
+        docViewerWindow.resize(400, 300)
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(docViewerWindow.sizePolicy().hasHeightForWidth())
         docViewerWindow.setSizePolicy(sizePolicy)
-        docViewerWindow.setMinimumSize(QSize(10, 10))
         self.gridLayout = QGridLayout(docViewerWindow)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalSpacer = QSpacerItem(35, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout.addItem(self.horizontalSpacer)
-
-        self.editButton = QPushButton(docViewerWindow)
-        self.editButton.setObjectName(u"editButton")
-        self.editButton.setMinimumSize(QSize(93, 28))
-
-        self.horizontalLayout.addWidget(self.editButton)
-
-        self.cancelButton = QPushButton(docViewerWindow)
-        self.cancelButton.setObjectName(u"cancelButton")
-        self.cancelButton.setEnabled(True)
-        self.cancelButton.setMinimumSize(QSize(93, 28))
-
-        self.horizontalLayout.addWidget(self.cancelButton)
-
-
-        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
-
         self.webEngineViewer = QWebEngineView(docViewerWindow)
         self.webEngineViewer.setObjectName(u"webEngineViewer")
         sizePolicy.setHeightForWidth(self.webEngineViewer.sizePolicy().hasHeightForWidth())
@@ -68,8 +44,6 @@ class Ui_docViewerWindow(object):
     # setupUi
 
     def retranslateUi(self, docViewerWindow):
-        docViewerWindow.setWindowTitle(QCoreApplication.translate("docViewerWindow", u"Dialog", None))
-        self.editButton.setText(QCoreApplication.translate("docViewerWindow", u"Edit", None))
-        self.cancelButton.setText(QCoreApplication.translate("docViewerWindow", u"Cancel", None))
+        docViewerWindow.setWindowTitle(QCoreApplication.translate("docViewerWindow", u"Form", None))
     # retranslateUi
 
