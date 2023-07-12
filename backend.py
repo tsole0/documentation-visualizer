@@ -15,7 +15,7 @@ class Window(Ui_docViewerWindow, QtWidgets.QMainWindow):
         self.ui = Ui_docViewerWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("Documentation Viewer")
-        self.load_html()
+        # self.load_html()
 
     def load_html(self):
         html = abspath("../sasview/docs/sphinx-docs/build/html/index.html")
