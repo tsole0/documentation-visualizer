@@ -17,8 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import (QApplication, QDialog, QGridLayout, QHBoxLayout,
-    QPushButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-    QWidget)
+    QPushButton, QSizePolicy, QSpacerItem, QWidget)
 
 class Ui_docViewerWindow(object):
     def setupUi(self, docViewerWindow):
@@ -53,23 +52,14 @@ class Ui_docViewerWindow(object):
         self.horizontalLayout.addWidget(self.cancelButton)
 
 
-        self.gridLayout.addLayout(self.horizontalLayout, 2, 0, 1, 1)
+        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 1, 1)
 
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setObjectName(u"verticalLayout")
         self.webEngineViewer = QWebEngineView(docViewerWindow)
         self.webEngineViewer.setObjectName(u"webEngineViewer")
-        sizePolicy1 = QSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.webEngineViewer.sizePolicy().hasHeightForWidth())
-        self.webEngineViewer.setSizePolicy(sizePolicy1)
-        self.webEngineViewer.setMinimumSize(QSize(0, 740))
+        sizePolicy.setHeightForWidth(self.webEngineViewer.sizePolicy().hasHeightForWidth())
+        self.webEngineViewer.setSizePolicy(sizePolicy)
 
-        self.verticalLayout.addWidget(self.webEngineViewer)
-
-
-        self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.webEngineViewer, 0, 0, 1, 1)
 
 
         self.retranslateUi(docViewerWindow)
