@@ -1,7 +1,6 @@
 import sys
 from os.path import abspath
 from PySide6 import QtGui, QtWebEngineWidgets, QtCore, QtWidgets
-
 from ui_docViewer import Ui_docViewerWindow
 
 
@@ -18,7 +17,8 @@ class Window(QtWidgets.QWidget, Ui_docViewerWindow):
         self.load_html()
 
     def load_html(self):
-        html = abspath("../sasview/docs/sphinx-docs/build/html/index.html")
+        # html = abspath("../sasview/docs/sphinx-docs/build/html/index.html")
+        html = abspath("my_docs.html")
         self.webEngineViewer.setUrl(QtCore.QUrl.fromLocalFile(html))
         # Show the web view in a window
 
