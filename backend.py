@@ -13,7 +13,7 @@ class Window(QtWidgets.QWidget, Ui_docViewerWindow):
         self.load_html()
 
     def load_html(self):
-        html = abspath("my_docs.html")
+        html = abspath("../sasview/docs/sphinx-docs/build/html/index.html")
         url = QtCore.QUrl.fromLocalFile(html)
         settings = self.webEngineViewer.settings()
         settings.setAttribute(QtWebEngineCore.QWebEngineSettings.LocalContentCanAccessRemoteUrls, True)
