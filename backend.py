@@ -15,24 +15,10 @@ class Window(QtWidgets.QWidget, Ui_docViewerWindow):
     def load_html(self):
         html = abspath("my_docs.html")
         url = QtCore.QUrl.fromLocalFile(html)
-        profile = CustomWebEngineProfile(self)
-        self.webEngineViewer.setPage(QtWebEngineWidgets.QWebEnginePage(profile, self.webEngineViewer))
+        settings = self.webEngineViewer.settings()
+        settings.setAttribute(QtWebEngineCore.QWebEngineSettings.LocalContentCanAccessRemoteUrls, True)
+        settings.setAttribute(QtWebEngineCore.QWebEngineSettings.LocalContentCanAccessFileUrls, True)
         self.webEngineViewer.load(url)
-
-
-class CustomWebEngineProfile(QtWebEngineCore.QWebEngineProfile):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.requestStarted.connect(self.interceptRequest)
-
-    def interceptRequest(self, request):
-        url = request.url().toString()
-        if url.startswith("http://") or url.startswith("https://"):
-            # Allow loading external resources
-            request.setHeader(b"Access-Control-Allow-Origin", b"*")
-        else:
-            # Allow loading local file resources
-            request.setHeader(b"Access-Control-Allow-Origin", b"null")
 
 
 if __name__ == "__main__":
