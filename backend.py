@@ -4,11 +4,7 @@ from PySide6 import QtGui, QtWebEngineWidgets, QtCore, QtWidgets
 from ui_docViewer import Ui_docViewerWindow
 
 
-# Load the HTML file
-
-
 class Window(QtWidgets.QWidget, Ui_docViewerWindow):
-
     def __init__(self):
         super().__init__()
         self.ui = Ui_docViewerWindow()
@@ -17,10 +13,23 @@ class Window(QtWidgets.QWidget, Ui_docViewerWindow):
         self.load_html()
 
     def load_html(self):
-        # html = abspath("../sasview/docs/sphinx-docs/build/html/index.html")
         html = abspath("my_docs.html")
-        self.webEngineViewer.setUrl(QtCore.QUrl.fromLocalFile(html))
-        # Show the web view in a window
+        url = QtCore.QUrl.fromLocalFile(html)
+        profile = QtWebEngineWidgets.QWebEngineProfile.defaultProfile()
+        profile.setUrlRequestInterceptor(CustomUrlRequestInterceptor())
+        self.webEngineViewer.setPage(QtWebEngineWidgets.QWebEnginePage(profile, self.webEngineViewer))
+        self.webEngineViewer.load(url)
+
+
+class CustomUrlRequestInterceptor(QtWebEngineWidgets.QWebEngineUrlRequestInterceptor):
+    def interceptRequest(self, info):
+        url = info.requestUrl().toString()
+        if url.startswith("http://") or url.startswith("https://"):
+            # Allow loading external resources
+            info.setHttpHeader(b"Access-Control-Allow-Origin", b"*")
+        else:
+            # Allow loading local file resources
+            info.setHttpHeader(b"Access-Control-Allow-Origin", b"null")
 
 
 if __name__ == "__main__":
